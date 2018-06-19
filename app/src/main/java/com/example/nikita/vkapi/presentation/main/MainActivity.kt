@@ -1,10 +1,11 @@
-package com.example.nikita.vk_api
+package com.example.nikita.vkapi.presentation.main
 
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.example.nikita.vk_api.other.FragmentCreator
+import android.support.v7.app.AppCompatActivity
+import com.example.nikita.vkapi.R
+import com.example.nikita.vkapi.other.FragmentCreator
 import com.vk.sdk.VKAccessToken
 import com.vk.sdk.VKCallback
 import com.vk.sdk.VKScope

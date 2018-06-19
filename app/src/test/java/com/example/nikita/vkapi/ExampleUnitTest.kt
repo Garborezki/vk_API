@@ -1,4 +1,4 @@
-package com.example.nikita.vk_api
+package com.example.nikita.vkapi
 
 import org.junit.Test
 

@@ -1,12 +1,14 @@
-package com.example.nikita.vk_api.presentation.cardInfo
+package com.example.nikita.vkapi.presentation.cardInfo
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.nikita.vk_api.R
-import com.example.nikita.vk_api.data.models.NewsModel
+import com.example.nikita.vkapi.R
+import com.example.nikita.vkapi.data.models.NewsModel
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.card.view.*
 import kotlinx.android.synthetic.main.card_info.*
 
 class CardInfoFragment : Fragment() {
@@ -36,6 +38,7 @@ class CardInfoFragment : Fragment() {
 
         data.text = news.date
         content.text = news.content
+        Picasso.get().load(news.imagePath).into(view.image)
     }
 
 
