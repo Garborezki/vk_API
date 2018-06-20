@@ -18,7 +18,7 @@ class CardInfoFragment : MvpAppCompatFragment(), CardInfoView {
 
     @InjectPresenter
     lateinit var presenter: CardInfoPresenter
-    lateinit var news: NewsModel
+    private lateinit var news: NewsModel
 
     companion object {
         fun newInstance(bundle: Bundle): Fragment {

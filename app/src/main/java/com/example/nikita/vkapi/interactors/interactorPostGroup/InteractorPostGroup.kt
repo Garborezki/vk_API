@@ -38,8 +38,8 @@ class InteractorPostGroup {
                         val photo = currentItem.getJSONArray("attachments")
                         try {
                             val firstPhoto = photo.get(0) as JSONObject
-                            val photo_604 = firstPhoto.get("photo") as JSONObject
-                            currentNews.imagePath = photo_604.getString("photo_604")
+                            val firstPhotoNews = firstPhoto.get("photo") as JSONObject
+                            currentNews.imagePath = firstPhotoNews.getString("photo_604")
                         } catch (e: Exception) {
 
                         }

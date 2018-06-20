@@ -5,7 +5,8 @@ import com.example.nikita.vkapi.data.models.NewsModel
 import ru.mosobrnadzor.other.utils.SQLBuilder
 
 object DBReposetory  {
-    lateinit var db: DataBase
+
+    private lateinit var db: DataBase
 
     fun init (context: Context) {
         db = DataBase(context)

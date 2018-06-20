@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.erroe_card.view.*
 class CardAdapter(val newsModelList: MutableList<NewsModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var listener: OnItemClick
 
-    val newsType = 0
-    val errorType = 1
+    private val newsType = 0
+    private val errorType = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {

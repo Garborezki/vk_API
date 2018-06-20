@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.example.nikita.vkapi.Application
 import com.example.nikita.vkapi.R
-import com.example.nikita.vkapi.other.FragmentCreator
 import com.example.nikita.vkapi.other.FragmentType
 import com.example.nikita.vkapi.presentation.cardInfo.CardInfoFragment
 import com.example.nikita.vkapi.presentation.newsList.NewsListFragment
@@ -22,9 +21,6 @@ import ru.terrakok.cicerone.android.SupportFragmentNavigator
 
 
 class MainActivity : AppCompatActivity() {
-
-
-    val fragmentCreator = FragmentCreator()
 
     private val navigator: Navigator = object : SupportFragmentNavigator(supportFragmentManager, R.id.fragment_container) {
 
@@ -53,20 +49,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         VKSdk.login(this, VKScope.WALL)
-        navigateTo(FragmentType.FragmentFabric.NEWS_LIST)
+        Application.SampleApplication.INSTANCE.getRouter().navigateTo(FragmentType.NEWS_LIST, Bundle())
 
-    }
-
-    fun navigateTo(fragmentFabric: FragmentType.FragmentFabric, bundle: Bundle = Bundle(),
-                   isPutBackStack: Boolean = false) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container,
-                fragmentCreator.createFragment(fragmentFabric, bundle))
-        if (isPutBackStack) {
-            transaction.addToBackStack(fragmentFabric.name)
-        }
-
-        transaction.commit()
     }
 
 
