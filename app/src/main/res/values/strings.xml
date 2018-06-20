@@ -7,5 +7,6 @@
     <string name="data">Дата</string>
     <string name="content">Текст</string>
     <string name="image_news">Картинка новости</string>
+    <string name="error_open_screen">Не удалось открыть экран</string>
     <integer name="com_vk_sdk_AppId">6605652</integer>
 </resources>

@@ -2,9 +2,11 @@ package com.example.nikita.vkapi.presentation.newsList
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.example.nikita.vkapi.Application
 import com.example.nikita.vkapi.data.dataBase.DBReposetory
 import com.example.nikita.vkapi.data.models.NewsModel
 import com.example.nikita.vkapi.interactors.interactorPostGroup.InteractorPostGroup
+import com.example.nikita.vkapi.other.FragmentType
 import com.example.nikita.vkapi.other.NewsEvent
 import com.example.nikita.vkapi.presentation.base.PresenterMVP
 import org.greenrobot.eventbus.EventBus
@@ -29,7 +31,8 @@ class NewsListPresenter : MvpPresenter<NewsListView>(), PresenterMVP {
         adapter = CardAdapter(DBReposetory.getNewsList())
         adapter.setOnItemClickListener(object : CardAdapter.OnItemClick {
             override fun onItemClick(newsModel: NewsModel) {
-                viewState.startFragmentCardInfo(newsModel)
+               // viewState.startFragmentCardInfo(newsModel)
+                Application.SampleApplication.INSTANCE.getRouter().navigateTo(FragmentType.CARD_INFO)
             }
         })
     }

@@ -9,9 +9,6 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.nikita.vkapi.R
 import com.example.nikita.vkapi.data.models.NewsModel
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.card.view.*
-import kotlinx.android.synthetic.main.card_info.*
 
 class CardInfoFragment : MvpAppCompatFragment(), CardInfoView {
 
@@ -23,14 +20,14 @@ class CardInfoFragment : MvpAppCompatFragment(), CardInfoView {
     companion object {
         fun newInstance(bundle: Bundle): Fragment {
             val fragment = CardInfoFragment()
-            fragment.arguments = bundle
+            // fragment.arguments = bundle
             return fragment
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        news = arguments!!.getSerializable(NewsModel::class.java.name) as NewsModel
+        // news = arguments!!.getSerializable(NewsModel::class.java.name) as NewsModel
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,10 +38,10 @@ class CardInfoFragment : MvpAppCompatFragment(), CardInfoView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        data.text = news.date
-        content.text = news.content
-        if (news.imagePath.isNotEmpty())
-            Picasso.get().load(news.imagePath).into(view.image)
+//        data.text = news.date
+        ///    content.text = news.content
+        //     if (news.imagePath.isNotEmpty())
+        //        Picasso.get().load(news.imagePath).into(view.image)
     }
 
 
