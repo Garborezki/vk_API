@@ -5,14 +5,19 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.nikita.vkapi.R
 import com.example.nikita.vkapi.data.models.NewsModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.card.view.*
 import kotlinx.android.synthetic.main.card_info.*
 
-class CardInfoFragment : Fragment() {
+class CardInfoFragment : MvpAppCompatFragment(), CardInfoView {
 
+
+    @InjectPresenter
+    lateinit var presenter: CardInfoPresenter
     lateinit var news: NewsModel
 
     companion object {
@@ -38,7 +43,8 @@ class CardInfoFragment : Fragment() {
 
         data.text = news.date
         content.text = news.content
-        Picasso.get().load(news.imagePath).into(view.image)
+        if (news.imagePath.isNotEmpty())
+            Picasso.get().load(news.imagePath).into(view.image)
     }
 
 

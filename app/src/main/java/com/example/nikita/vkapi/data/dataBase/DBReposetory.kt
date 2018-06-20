@@ -13,7 +13,7 @@ object DBReposetory  {
 
     fun insertNews(listNewsModel: List<NewsModel>) {
 
-        val builder = SQLBuilder().insertOrIgnoreInto(DBTable.NEWS_TABLE,
+        val builder = SQLBuilder().insertOrReplaceInto(DBTable.NEWS_TABLE,
                 DBFild.ID,
                 DBFild.DATA,
                 DBFild.CONTENT,

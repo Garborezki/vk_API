@@ -1,5 +1,7 @@
 package com.example.nikita.vkapi.presentation.newsList
 
+import com.arellomobile.mvp.InjectViewState
+import com.arellomobile.mvp.MvpPresenter
 import com.example.nikita.vkapi.data.dataBase.DBReposetory
 import com.example.nikita.vkapi.data.models.NewsModel
 import com.example.nikita.vkapi.interactors.interactorPostGroup.InteractorPostGroup
@@ -8,56 +10,46 @@ import com.example.nikita.vkapi.presentation.base.PresenterMVP
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.util.*
 
-class NewsListPresenter: PresenterMVP {
+@InjectViewState
+class NewsListPresenter : MvpPresenter<NewsListView>(), PresenterMVP {
 
-
-    var newsListFragment: NewsListFragment? = null
+    //var newsListFragment: NewsListFragment? = null
     private val interactorPostGroup = InteractorPostGroup()
     lateinit var adapter: CardAdapter
 
+    init {
+        initPresenter()
+    }
+
     override fun initPresenter() {
 
+        EventBus.getDefault().register(this)
         interactorPostGroup.requestVk()
         adapter = CardAdapter(DBReposetory.getNewsList())
-        adapter.setOnItemClickListener(ItemClickListener())
+        adapter.setOnItemClickListener(object : CardAdapter.OnItemClick {
+            override fun onItemClick(newsModel: NewsModel) {
+                viewState.startFragmentCardInfo(newsModel)
+            }
+        })
     }
 
     override fun bindFragment(newsListFragment: NewsListFragment) {
-        this.newsListFragment = newsListFragment
-        EventBus.getDefault().register(this)
+        // this.newsListFragment = newsListFragment
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun setNewsList(newsEvent: NewsEvent) {
-
+        if (newsEvent.errorMessage.isNotEmpty())
+            viewState.makeErrorToast(newsEvent.errorMessage)
         adapter.updateNews(DBReposetory.getNewsList())
+
     }
 
     override fun unbindFragment() {
-        newsListFragment = null
+        //newsListFragment = null
         EventBus.getDefault().unregister(this)
     }
-
-    private fun createExampleList(): ArrayList<NewsModel> {
-        val item = NewsModel()
-        item.date = "Дата опубликования"
-        item.content = "Текст какой то новости, которая отображается в карточке и занимает как минимум две строки"
-        val itemList = ArrayList<NewsModel>()
-        itemList.add(item)
-        itemList.add(item)
-        itemList.add(item)
-        itemList.add(item)
-        itemList.add(item)
-        return itemList
-    }
-
-    inner class ItemClickListener : CardAdapter.OnItemClick {
-        override fun onItemClick(newsModel: NewsModel) {
-            newsListFragment!!.startFragmentCardInfo(newsModel)
-        }
-    }
-
 
 }

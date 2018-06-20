@@ -28,13 +28,12 @@ class InteractorPostGroup {
                 try {
                     val jsonObjects = response!!.json.get("response") as JSONObject
                     val item = jsonObjects.get("items") as JSONArray
-                    for (i in 0..item.length() ) {
+                    for (i in 0..(item.length() - 1) ) {
                         val currentNews = NewsModel()
                         val currentItem = item.get(i) as JSONObject
                         currentNews.id = currentItem.getInt("id")
                         val timeStamp = Timestamp(currentItem.getString("date").toLong())
-                        val a = Date(timeStamp.time)
-                        currentNews.date = a.toString()
+                        currentNews.date =  Date(timeStamp.time).toString()
                         currentNews.content = currentItem.getString("text")
                         val photo = currentItem.getJSONArray("attachments")
                         try {
@@ -48,19 +47,14 @@ class InteractorPostGroup {
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    val errorCard = NewsModel()
-                    errorCard.content = "Ошибка при загрузке"
-                    newsList.add(errorCard)
                 }
                 DBReposetory.insertNews(newsList)
                 EventBus.getDefault().post(NewsEvent())
             }
 
             override fun onError(error: VKError?) {
-                val errorCard = NewsModel()
-                errorCard.content = "Ошибка при подключении"
-                newsList.add(errorCard)
-                EventBus.getDefault().post(newsList)
+
+                EventBus.getDefault().post(NewsEvent(error!!.errorMessage))
             }
 
             override fun attemptFailed(request: VKRequest?, attemptNumber: Int, totalAttempts: Int) {

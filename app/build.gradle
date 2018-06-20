@@ -4,6 +4,13 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+ext {
+    moxyVersion = "1.5.3"
+}
+
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -36,5 +43,12 @@ dependencies {
     implementation 'com.vk:androidsdk:1.6.9'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.google.code.gson:gson:2.8.5'
+
+
+    implementation "com.arello-mobile:moxy:$moxyVersion"
+    implementation "com.arello-mobile:moxy-android:$moxyVersion"
+    implementation "com.arello-mobile:moxy-app-compat:$moxyVersion"
+    kapt "com.arello-mobile:moxy-compiler:$moxyVersion"
+
     implementation 'com.squareup.picasso:picasso:2.71828'
 }

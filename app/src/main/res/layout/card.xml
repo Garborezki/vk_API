@@ -19,14 +19,14 @@
             android:layout_height="wrap_content"
             android:maxHeight="170dp"
             android:scaleType="centerCrop"
-            android:src="@android:color/holo_blue_light"/>
+            android:contentDescription="@string/image_news"/>
 
         <TextView
             android:id="@+id/data"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Дата"/>
+            android:text="@string/data"/>
 
         <TextView
             android:id="@+id/content"
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="5"
-            android:text="Текст"/>
+            android:text="@string/content"/>
 
     </LinearLayout>
 

@@ -65,7 +65,7 @@ class CardAdapter(val newsModelList: MutableList<NewsModel>) : RecyclerView.Adap
         val card = v.card
 
         init {
-            card.setOnClickListener({ listener.onItemClick(newsModelList[adapterPosition]) })
+            card.setOnClickListener({ listener.onItemClick(newsModelList[adapterPosition])})
         }
     }
 

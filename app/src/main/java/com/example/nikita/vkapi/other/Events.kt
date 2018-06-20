@@ -1,3 +1,3 @@
 package com.example.nikita.vkapi.other
 
-class NewsEvent
+class NewsEvent(var errorMessage: String = "")
