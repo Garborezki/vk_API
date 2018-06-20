@@ -1,5 +1,6 @@
 package com.example.nikita.vkapi.presentation.newsList
 
+import android.os.Bundle
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.nikita.vkapi.Application
@@ -32,7 +33,9 @@ class NewsListPresenter : MvpPresenter<NewsListView>(), PresenterMVP {
         adapter.setOnItemClickListener(object : CardAdapter.OnItemClick {
             override fun onItemClick(newsModel: NewsModel) {
                // viewState.startFragmentCardInfo(newsModel)
-                Application.SampleApplication.INSTANCE.getRouter().navigateTo(FragmentType.CARD_INFO)
+                val bundle = Bundle()
+                bundle.putSerializable(NewsModel::class.java.name, newsModel)
+                Application.SampleApplication.INSTANCE.getRouter().navigateTo(FragmentType.CARD_INFO, bundle)
             }
         })
     }

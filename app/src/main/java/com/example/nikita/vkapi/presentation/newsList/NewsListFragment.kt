@@ -28,6 +28,7 @@ class NewsListFragment : MvpAppCompatFragment(), NewsListView {
             fragment.arguments = bundle
             return fragment
         }
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

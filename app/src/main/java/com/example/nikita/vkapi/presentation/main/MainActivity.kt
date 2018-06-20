@@ -31,10 +31,7 @@ class MainActivity : AppCompatActivity() {
         override fun createFragment(screenKey: String?, data: Any?): Fragment {
             return when (screenKey) {
                 FragmentType.CARD_INFO -> {
-                    CardInfoFragment.newInstance(Bundle())
-                }
-                FragmentType.NEWS_LIST -> {
-                    NewsListFragment.newInstance(data as Bundle)
+                    CardInfoFragment.newInstance(data as Bundle)
                 }
                 else -> {
                     NewsListFragment.newInstance(data as Bundle)
