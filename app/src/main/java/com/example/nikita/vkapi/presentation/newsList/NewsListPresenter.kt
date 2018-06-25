@@ -6,7 +6,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.example.nikita.vkapi.Application
 import com.example.nikita.vkapi.data.dataBase.DBReposetory
 import com.example.nikita.vkapi.data.models.NewsModel
-import com.example.nikita.vkapi.interactors.interactorPostGroup.InteractorPostGroup
+import com.example.nikita.vkapi.interactors.PostGroup
 import com.example.nikita.vkapi.other.FragmentType
 import com.example.nikita.vkapi.other.NewsEvent
 import org.greenrobot.eventbus.EventBus
@@ -16,9 +16,9 @@ import org.greenrobot.eventbus.ThreadMode
 @InjectViewState
 class NewsListPresenter : MvpPresenter<NewsListView>() {
 
-    //var newsListFragment: NewsListFragment? = null
-    private val interactorPostGroup = InteractorPostGroup()
+    private val interactorPostGroup = PostGroup()
     lateinit var adapter: CardAdapter
+
 
     init {
         initPresenter()
@@ -27,7 +27,9 @@ class NewsListPresenter : MvpPresenter<NewsListView>() {
     private fun initPresenter() {
 
         EventBus.getDefault().register(this)
-        interactorPostGroup.requestVk()
+
+        interactorPostGroup.groupResponse()
+
         adapter = CardAdapter(DBReposetory.getNewsList())
         adapter.setOnItemClickListener(object : CardAdapter.OnItemClick {
             override fun onItemClick(newsModel: NewsModel) {
@@ -36,6 +38,11 @@ class NewsListPresenter : MvpPresenter<NewsListView>() {
                 Application.SampleApplication.INSTANCE.getRouter().navigateTo(FragmentType.CARD_INFO, bundle)
             }
         })
+    }
+
+    override fun onDestroy() {
+        interactorPostGroup.unsubscribe()
+
     }
 
 

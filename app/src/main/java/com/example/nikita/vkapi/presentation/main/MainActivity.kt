@@ -1,7 +1,6 @@
 package com.example.nikita.vkapi.presentation.main
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -11,11 +10,6 @@ import com.example.nikita.vkapi.R
 import com.example.nikita.vkapi.other.FragmentType
 import com.example.nikita.vkapi.presentation.cardInfo.CardInfoFragment
 import com.example.nikita.vkapi.presentation.newsList.NewsListFragment
-import com.vk.sdk.VKAccessToken
-import com.vk.sdk.VKCallback
-import com.vk.sdk.VKScope
-import com.vk.sdk.VKSdk
-import com.vk.sdk.api.VKError
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.SupportFragmentNavigator
 
@@ -48,26 +42,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        VKSdk.login(this, VKScope.WALL)
         Application.SampleApplication.INSTANCE.getRouter().navigateTo(FragmentType.NEWS_LIST, Bundle())
 
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        if (!VKSdk.onActivityResult(requestCode, resultCode, data, object : VKCallback<VKAccessToken> {
-
-                    override fun onResult(res: VKAccessToken) {
-                    }
-
-                    override fun onError(error: VKError) {
-
-                    }
-
-                })) {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
     }
 
     override fun onResume() {

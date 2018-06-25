@@ -49,7 +49,7 @@ class NewsListFragment : MvpAppCompatFragment(), NewsListView {
     }
 
     override fun makeErrorToast(errorMessage: String) {
-        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
     }
 
 }
